@@ -183,4 +183,9 @@ def is_present(lista,elemento,cmp_function):
     if not is_in_array:
         count= -1
     return count
+def default_sort_criteria(element_1, element_2):
 
+   is_sorted = False
+   if element_1 < element_2:
+      is_sorted = True
+   return is_sorted

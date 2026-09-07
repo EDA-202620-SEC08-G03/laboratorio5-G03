@@ -62,8 +62,8 @@ def new_logic(user_data_structure):
     # Usamos la estructura seleccionada para inicializar todas las listas
     # TODO: completar la creacion de la lista de autores y tags
     catalog["books"] = data_structure.new_list()
-    catalog["authors"] = None 
-    catalog["tags"] = None 
+    catalog["authors"] = data_structure.new_list()  
+    catalog["tags"] = data_structure.new_list()
     catalog["book_tags"] = data_structure.new_list()
 
     return catalog
