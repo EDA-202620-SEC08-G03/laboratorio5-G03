@@ -140,3 +140,54 @@ def last_element (my_list):
         
     elemento = my_list["elements"][my_list["size"] - 1]
     return elemento
+
+def default_sort_criteria (element_1, element_2) -> bool:
+    
+    is_sorted = False
+    if element_1 < element_2:
+        is_sorted = True
+    return is_sorted
+    
+def selection_sort (my_list, sort_crit):
+    
+    tamaño = size(my_list)
+
+    for indice in range(tamaño):
+        posicion_menor = indice
+        for posicion in range(indice + 1, tamaño):
+            if sort_crit(get_element(my_list, posicion), get_element(my_list, posicion_menor)):
+                posicion_menor = posicion
+        if posicion_menor != indice:
+            my_list = exchange(my_list, indice, posicion_menor)
+
+    return my_list
+
+def insertion_sort (my_list, sort_crit):
+
+    tamaño = size(my_list)
+
+    for indice in range(1, tamaño):
+        posicion = indice
+        while posicion > 0 and sort_crit(get_element(my_list, posicion), get_element(my_list, posicion - 1)):
+            my_list = exchange(my_list, posicion, posicion - 1)
+            posicion -= 1
+
+    return my_list
+
+def shell_sort (my_list, sort_crit):
+    
+    tamaño = size(my_list)
+
+    if tamaño <= 1:
+        return my_list
+
+    salto = tamaño // 2
+    while salto > 0:
+        for indice in range(salto, tamaño):
+            posicion = indice
+            while posicion >= salto and sort_crit(get_element(my_list, posicion), get_element(my_list, posicion - salto)):
+                my_list = exchange(my_list, posicion, posicion - salto)
+                posicion -= salto
+        salto = salto // 2
+
+    return my_list
