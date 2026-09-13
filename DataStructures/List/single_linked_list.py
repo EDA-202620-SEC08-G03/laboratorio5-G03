@@ -189,3 +189,53 @@ def default_sort_criteria(element_1, element_2):
    if element_1 < element_2:
       is_sorted = True
    return is_sorted
+
+def selection_sort(lista, cmp_function=default_sort_criteria):
+    if lista["size"] > 1:
+        current = lista["first"]
+        while current is not None:
+            min_node = current
+            next_node = current["next"]
+            while next_node is not None:
+                if not cmp_function(min_node["info"], next_node["info"]):
+                    min_node = next_node
+                next_node = next_node["next"]
+            if min_node != current:
+                current["info"], min_node["info"] = min_node["info"], current["info"]
+            current = current["next"]
+    return lista
+
+def insertion_sort(lista, cmp_function=default_sort_criteria):
+    if lista["size"] > 1:
+        current = lista["first"]["next"]
+        while current is not None:
+            key = current["info"]
+            prev = lista["first"]
+            while prev != current and cmp_function(prev["info"], key):
+                prev = prev["next"]
+            if prev != current:
+                carry = prev["info"]
+                prev["info"] = key
+                node = prev["next"]
+                while node != current:
+                    next_carry = node["info"]
+                    node["info"] = carry
+                    carry = next_carry
+                    node = node["next"]
+                node["info"] = carry  # node == current aquí
+            current = current["next"]
+    return lista
+
+def shell_sort(lista, cmp_function=default_sort_criteria):
+    n = lista["size"]
+    gap = n // 2
+    while gap > 0:
+        for i in range(gap, n):
+            temp = get_element(lista, i)
+            j = i
+            while j >= gap and not cmp_function(get_element(lista, j - gap), temp):
+                change_info(lista, j, get_element(lista, j - gap))
+                j -= gap
+            change_info(lista, j, temp)
+        gap //= 2
+    return lista
