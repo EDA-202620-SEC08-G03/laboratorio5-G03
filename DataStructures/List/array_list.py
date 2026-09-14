@@ -191,3 +191,4 @@ def shell_sort (my_list, sort_crit):
         salto = salto // 2
 
     return my_list
+def merge_sort(lista,cmp_function=)

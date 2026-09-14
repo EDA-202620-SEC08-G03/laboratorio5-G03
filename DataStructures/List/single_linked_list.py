@@ -239,3 +239,27 @@ def shell_sort(lista, cmp_function=default_sort_criteria):
             change_info(lista, j, temp)
         gap //= 2
     return lista
+def merge_sort(lista, cmp_function=default_sort_criteria):
+    if lista["size"] > 1:
+        medio = lista["size"] // 2
+        izquierda = sub_list(lista, 0, medio)
+        derecha= sub_list(lista, medio, lista["size"] - medio)
+
+        merge_sort(izquierda, cmp_function)
+        merge_sort(derecha, cmp_function)
+
+        i = 0
+        j = 0
+        k = 0
+        while i < izquierda["size"] and j < derecha["size"]:
+            if cmp_function(get_element(izquierda, i), get_element(derecha, j)):
+                change_info(lista, k, get_element(izquierda, i))
+                i += 1
+            else:
+                change_info(lista, k, get_element(derecha, j))
+                j += 1
+            k += 1
+
+    return lista
+    
+        
