@@ -147,6 +147,12 @@ def print_sort_results(sort_books, sample=3):
             # Obtener el libro en la posición actual.
             book = data_structure.get_element(sorted_books, book_pos)
             # TODO: Completar la lógica para imprimir la información del libro.
+            print(f"Título: {book['title']}")
+            print(f"Autor(es): {book['authors']}")
+            print(f"Año de publicación: {book['original_publication_year']}")
+            print(f"Idioma: {book['language_code']}")
+            print(f"Rating promedio: {book['average_rating']}")
+            print(f"Cantidad de ratings: {book['ratings_count']}")    
             # Disminuir el contador de la muestra.
             sample -= 1
 
