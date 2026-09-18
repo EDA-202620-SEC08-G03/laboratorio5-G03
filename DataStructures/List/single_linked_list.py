@@ -240,26 +240,54 @@ def shell_sort(lista, cmp_function=default_sort_criteria):
         gap //= 2
     return lista
 def merge_sort(lista, cmp_function=default_sort_criteria):
-    if lista["size"] > 1:
-        medio = lista["size"] // 2
-        izquierda = sub_list(lista, 0, medio)
-        derecha= sub_list(lista, medio, lista["size"] - medio)
-
-        merge_sort(izquierda, cmp_function)
-        merge_sort(derecha, cmp_function)
-
-        i = 0
-        j = 0
-        k = 0
-        while i < izquierda["size"] and j < derecha["size"]:
-            if cmp_function(get_element(izquierda, i), get_element(derecha, j)):
-                change_info(lista, k, get_element(izquierda, i))
-                i += 1
-            else:
-                change_info(lista, k, get_element(derecha, j))
-                j += 1
-            k += 1
-
-    return lista
+    if lista["size"] <= 1:
+        return lista
+    medio = lista["size"] // 2
+    izq = merge_sort(sub_list(lista, 0, medio), cmp_function)
+    der = merge_sort(sub_list(lista, medio, medio), cmp_function)
+    result = new_list()
+    i = 0
+    j = 0
+    while i < izq["size"] and j < der["size"]:
+        elem_izq = get_element(izq, i)
+        elem_der = get_element(der, j)  
+        if cmp_function(elem_izq, elem_der): 
+            add_last(result, elem_izq)  
+            i += 1
+        else:
+            add_last(result, elem_der)
+            j += 1        
+    while i < izq["size"]:
+        add_last(result, get_element(izq, i))
+        i += 1    
+    while j < der["size"]:
+        add_last(result, get_element(der, j))
+        j += 1   
+    return result
     
-        
+def quick_sort(lista, cmp_function=default_sort_criteria):
+    if lista["size"] <= 1:
+        return lista
+    pivot = first_element(lista)
+    left = new_list()
+    right = new_list()
+    actual = lista["first"]["next"]
+    while actual is not None:
+        if cmp_function(actual["info"], pivot):
+            add_last(left, actual["info"])
+        else:
+            add_last(right, actual["info"])
+        actual = actual["next"]
+    left_sorted = quick_sort(left, cmp_function)
+    right_sorted = quick_sort(right, cmp_function)
+    result = new_list()
+    actual = left_sorted["first"]
+    while actual is not None:
+        add_last(result, actual["info"])
+        actual = actual["next"]
+    add_last(result, pivot)
+    actual = right_sorted["first"]
+    while actual is not None:
+        add_last(result, actual["info"])
+        actual = actual["next"]
+    return result

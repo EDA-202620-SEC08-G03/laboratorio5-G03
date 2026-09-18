@@ -284,16 +284,13 @@ def count_books_by_tag(catalog, tag_name):
 
 # TODO: completar las funciones para obtener el tamaño de la lista de libros, autores y tagas
 def book_size(catalog):
-    pass
-
+    return data_structure.size(catalog["books"])
 
 def author_size(catalog):
-    pass
-
+    return data_structure.size(catalog["authors"])
 
 def tag_size(catalog):
-    pass
-
+    return data_structure.size(catalog["tags"])
 
 def book_tag_size(catalog):
     return data_structure.size(catalog["book_tags"])
@@ -334,7 +331,10 @@ def compare_book_ids(id, book):
 
 def eval_ratings(book1, book2):
     # TODO: completar la función para comparar dos libros por su rating promedio, el libro 1 debe ser mayor al 2.
-    pass
+    if book1["average_rating"]>book2["average_rating"]:
+        return 1
+    else:
+        return -1
 
 #  -----------------------------------------------
 # Funciones de ordenamiento
@@ -349,19 +349,19 @@ def sort_books(catalog):
     # TODO: cambie el None para completar las opciones para selection_sort, insertion_sort, shell_sort, merge_sort y quick_sort 
 
     if sort_algorithm == 1:
-        sorted_books_s = None  
+        sorted_books_s = data_structure.selection_sort(sorted_books,data_structure.default_sort_criteria)
 
     elif sort_algorithm == 2:
-        sorted_books_s = None
+        sorted_books_s = data_structure.insertion_sort(sorted_books,data_structure.default_sort_criteria)
 
     elif sort_algorithm == 3:
-        sorted_books_s = None
+        sorted_books_s = data_structure.shell_sort(sorted_books,data_structure.default_sort_criteria)
 
     elif sort_algorithm == 4:
-        sorted_books_s = None
+        sorted_books_s = data_structure.merge_sort(sorted_books,data_structure.default_sort_criteria)
 
     elif sort_algorithm == 5:
-        sorted_books_s = None
+        sorted_books_s = data_structure.quick_sort(sorted_books,data_structure.default_sort_criteria)
 
     end_time = get_time()
     delta = delta_time(start_time, end_time)

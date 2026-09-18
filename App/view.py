@@ -54,10 +54,12 @@ def print_menu():
     """
     print("Bienvenido")
     #TODO: agregar opción 0 para escoger el tipo de estructura de datos y opción 5 para seleccionar el algoritmo de ordenamiento
+    print("0- Escoger tipo de estructura de datos")
     print("1- Cargar información en el catálogo")
     print("2- Consultar la información de un libro")
     print("3- Consultar los libros de un autor")
     print("4- Libros por género")
+    print("5- Seleccionar el algoritmo de ordenamiento")
     print("6- Seleccionar muestra de libros")
     print("7- Ordenar los libros por rating")
     print("8- Salir")
@@ -191,7 +193,10 @@ def main():
             print("Cargando información de los archivos ....")
             bk, at, tg, bktg = load_data(control)
             #TODO: imprimir la cantidad de libros, autores, géneros y asociaciones de géneros a libros cargados
-
+            print(f"Total de libros cargados: {logic.book_size(bk)}")
+            print(f"Total de autores cargados: {logic.author_size(at)}")
+            print(f"Total de géneros cargados: {logic.tag_size(tg)}")
+            print(f"Total de asociaciones libro-género: {logic.book_tag_size(bktg)}")
         elif int(inputs[0]) == 2:
             number = input("Ingrese el id del libro que desea buscar: ")
             book = logic.get_book_info_by_book_id(control, int(number))
