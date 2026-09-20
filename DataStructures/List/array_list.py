@@ -152,13 +152,13 @@ def selection_sort (my_list, sort_crit):
     
     tamaño = size(my_list)
 
-    for indice in range(tamaño):
-        posicion_menor = indice
-        for posicion in range(indice + 1, tamaño):
+    for elemento in range(tamaño):
+        posicion_menor = elemento
+        for posicion in range(elemento + 1, tamaño):
             if sort_crit(get_element(my_list, posicion), get_element(my_list, posicion_menor)):
                 posicion_menor = posicion
-        if posicion_menor != indice:
-            my_list = exchange(my_list, indice, posicion_menor)
+        if posicion_menor != elemento:
+            my_list = exchange(my_list, elemento, posicion_menor)
 
     return my_list
 
