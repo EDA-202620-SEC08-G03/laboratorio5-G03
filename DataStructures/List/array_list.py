@@ -191,3 +191,64 @@ def shell_sort (my_list, sort_crit):
         salto = salto // 2
 
     return my_list
+def merge_sort(my_list, cmp_function=default_sort_criteria):
+    if my_list["size"] <= 1:
+        return my_list
+    
+    medio = my_list["size"] // 2
+    izq = merge_sort(sub_list(my_list, 0, medio), cmp_function)
+    der = merge_sort(sub_list(my_list,medio, my_list["size"]), cmp_function)
+    
+    result = new_list()
+    i = 0
+    j = 0
+    
+    while i < izq["size"] and j < der["size"]:
+        elem_izq = get_element(izq, i)
+        elem_der = get_element(der, j)
+        
+        if cmp_function(elem_izq, elem_der): 
+            add_last(result, elem_izq)  
+            i += 1
+        else:
+            add_last(result, elem_der)
+            j += 1
+            
+    while i < izq["size"]:
+        add_last(result, get_element(izq, i))
+        i += 1
+        
+    while j < der["size"]:
+        add_last(result, get_element(der, j))
+        j += 1
+        
+    return result
+def quick_sort(lista, cmp_function=default_sort_criteria):
+    if lista["size"] <= 1:
+        return lista
+    pivot = get_element(lista,0)
+    left = new_list()
+    right = new_list()
+    i=1
+    while i<lista["size"]:
+        actual=get_element(lista,i)
+        if cmp_function(actual, pivot):
+            add_last(left, actual)
+        else:
+            add_last(right, actual)
+        i+=1
+    left_sorted = quick_sort(left, cmp_function)
+    right_sorted = quick_sort(right, cmp_function)
+    result = new_list()
+    j=0
+    while j<size(left_sorted):
+        actual = get_element(left_sorted,j)
+        add_last(result, actual)
+        j+=1
+    add_last(result, pivot)
+    j=0
+    while j<size(right_sorted):
+        actual = get_element(right_sorted,j)
+        add_last(result, actual)
+        j+=1
+    return result
